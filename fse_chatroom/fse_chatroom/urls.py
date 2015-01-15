@@ -6,5 +6,6 @@ urlpatterns = patterns('',
     # url(r'^$', 'fse_chatroom.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
+    url(r'^', include('chatroom.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
