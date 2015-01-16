@@ -1,2 +1,41 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="/static/jquery.gracefulWebSocket.js" %}"></script>
+<script>
+    $(document).ready( function() {
+    window.chat = {};
+    //Instantiate a websocket client connected to our server
+    chat.ws = $.gracefulWebSocket("ws://127.0.0.1:1025/ws");
+
+    //Basic message send
+    chat.send = function (message) {
+      chat.ws.send(message);
+    }
+
+    //Basic message receive
+    chat.ws.onmessage = function (event) {
+      var messageFromServer = event.data;
+      var list_element = document.createElement('li');
+      list_element.innerHTML = messageFromServer;
+      $("#message_list ul").prepend(list_element);
+    };
+
+    var inputbox = document.getElementById("inputbox");
+
+    inputbox.addEventListener("keydown", function(e) {
+      if (!e) { var e = window.event; }
+
+      //keyCode 13 is the enter/return button keyCode
+      if (e.keyCode == 13) {
+        // enter/return probably starts a new line by default
+        e.preventDefault();
+        chat.send(inputbox.value);
+        inputbox.value="";
+      }
+    }, false); });
+</script>
+
 <h1>{{ chat.name }}</h1>
-<div id="message">haha</div>
+<div id="message_list">
+  <ul></ul>
+</div>
+<textarea rows="3" cols="20" id="inputbox"></textarea>
