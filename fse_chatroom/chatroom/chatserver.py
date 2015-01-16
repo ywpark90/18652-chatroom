@@ -5,7 +5,6 @@ from twisted.web.websockets import WebSocketsResource, WebSocketsProtocol, looku
 class MyChat(basic.LineReceiver):
     def connectionMade(self):
         print "Got new client!"
-        self.transport.write('connected ....\n')
         self.factory.clients.append(self)
 
     def connectionLost(self, reason):
@@ -15,7 +14,9 @@ class MyChat(basic.LineReceiver):
     def dataReceived(self, data):
         print "received", repr(data)
         for c in self.factory.clients:
-            c.message(data)
+            uname_msg = data.split(":")
+            msg = uname_msg[0] + ": " + uname_msg[1]
+            c.message(msg)
 
     def message(self, message):
         self.transport.write(message + '\n')

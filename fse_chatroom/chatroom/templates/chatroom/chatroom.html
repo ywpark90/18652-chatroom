@@ -2,13 +2,18 @@
 <script type="text/javascript" src="/static/jquery.gracefulWebSocket.js" %}"></script>
 <script>
     $(document).ready( function() {
+    var name = prompt("What is your name?", "Anonymous");
+    if (name == null) {
+      name = "Anonymous";
+    }
+
     window.chat = {};
     //Instantiate a websocket client connected to our server
     chat.ws = $.gracefulWebSocket("ws://127.0.0.1:1025/ws");
 
     //Basic message send
     chat.send = function (message) {
-      chat.ws.send(message);
+      chat.ws.send(name+":"+message);
     }
 
     //Basic message receive
@@ -38,4 +43,4 @@
 <div id="message_list">
   <ul></ul>
 </div>
-<textarea rows="3" cols="20" id="inputbox"></textarea>
+<textarea rows="4" cols="40" id="inputbox"></textarea>
