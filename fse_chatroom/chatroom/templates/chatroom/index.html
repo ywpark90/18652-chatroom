@@ -1,15 +1,18 @@
+<link href="/static/chatroom.css" rel="stylesheet">
 {% if chatlist %}
-<ul>
-  <ul>{% for chat in chatlist %}</ul>
-</ul>
-
-<ul>
-  <ul>
-    <li><a id="" href="{% url 'chatroom' chat.id %}">{{ chat.name }}</a></li>
-  </ul>
-</ul>
-
-<ul>{% endfor %}</ul>
+<div class="container">
+  <div class="room_header">
+    {% for chat in chatlist %}
+      <div class="chatname">
+        {{ chat.name }}
+        <a href="{% url 'chatroom' chat.id %}">Enter chatroom</a>
+      </div>
+    {% endfor %}
+  </div>
+  <div id="message_list">
+  </div>
+</div>
+<textarea rows="4" cols="40" id="inputbox"></textarea>
 {% else %}
 No chats
 {% endif %}

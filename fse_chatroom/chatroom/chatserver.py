@@ -16,7 +16,7 @@ class MyChat(basic.LineReceiver):
     def dataReceived(self, data):
         print "received", repr(data)
         for c in self.factory.clients:
-            uname_msg = data.split(":")
+            uname_msg = data.split(":", 1)
             u = uname_msg[0]
             m = uname_msg[1]
             t = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')

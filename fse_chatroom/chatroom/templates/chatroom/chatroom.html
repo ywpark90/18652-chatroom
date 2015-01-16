@@ -2,9 +2,21 @@
 <script type="text/javascript" src="/static/jquery.gracefulWebSocket.js" %}"></script>
 <script>
     $(document).ready( function() {
-    var name = prompt("What is your name?", "Anonymous");
-    if (name == null) {
-      name = "Anonymous";
+
+    while(true) {
+      var name = prompt("Enter your name", "Anonymous");
+      if (name == null) {
+        name = "Anonymous";
+        break;
+      }
+
+      if (!/^[-_ a-zA-Z0-9]+$/.test(name)) {
+        alert("Invalid name");
+      } else if (name.length > 10) {
+        alert("Name is too long");
+      } else {
+        break;
+      }
     }
 
     window.chat = {};
@@ -33,7 +45,7 @@
       if (!e) { var e = window.event; }
 
       //keyCode 13 is the enter/return button keyCode
-      if (e.keyCode == 13) {
+      if (e.keyCode == 13 && inputbox.value.match(/\S/)) {
         // enter/return probably starts a new line by default
         e.preventDefault();
         chat.send(inputbox.value);

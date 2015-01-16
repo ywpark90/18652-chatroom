@@ -8,6 +8,10 @@
 }
 
 .chatname {
+  margin-bottom: 3px;
+}
+
+.chatname {
   font-size: 30px;
 }
 
@@ -46,11 +50,13 @@
 .message_name {
   float: left;
   font-style: italic;
+  width: 100px;
 }
 
 .message_time {
   display: inline-block;
   float: right;
+  width: 140px;
 }
 
 .message_content {
