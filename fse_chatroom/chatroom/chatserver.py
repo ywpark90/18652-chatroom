@@ -1,6 +1,8 @@
 from twisted.protocols import basic
 from twisted.web.websockets import WebSocketsResource, WebSocketsProtocol, lookupProtocolForFactory
 
+import time, datetime
+
 #basic protocol/api for handling realtime chat
 class MyChat(basic.LineReceiver):
     def connectionMade(self):
@@ -15,7 +17,15 @@ class MyChat(basic.LineReceiver):
         print "received", repr(data)
         for c in self.factory.clients:
             uname_msg = data.split(":")
-            msg = uname_msg[0] + ": " + uname_msg[1]
+            u = uname_msg[0]
+            m = uname_msg[1]
+            t = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+
+            msg = "<div class=\"message\">"
+            msg += "<div class=\"message_header\">"
+            msg += "<div class=\"message_name\">" + u + "</div>"
+            msg += "<div class=\"message_time\">" + t + "</div></div>"
+            msg += "<div class=\"message_content\">" + m + "</div></div>"
             c.message(msg)
 
     def message(self, message):

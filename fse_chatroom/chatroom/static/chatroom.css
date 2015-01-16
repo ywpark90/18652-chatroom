@@ -1,0 +1,58 @@
+#message_list {
+  width: 250px;
+  height: 300px;
+  overflow-y: scroll;
+  margin-bottom: 10px;
+  border: 5px outset #98bf21;
+  padding: 3px;
+}
+
+.chatname {
+  font-size: 30px;
+}
+
+.chatname a {
+  font-size: 15px;
+}
+
+#inputbox {
+  width: 265px;
+  height: 50px;
+}
+
+.container {
+  width: 265px;
+}
+
+.room_header {
+  width: 100%;
+  display: block;
+}
+
+.message {
+  display: block;
+  border-bottom-style: dashed;
+  border-width: 1px;
+}
+
+.message_container {
+  padding: 3px;
+}
+
+.message_header {
+  width: 100%;
+}
+
+.message_name {
+  float: left;
+  font-style: italic;
+}
+
+.message_time {
+  display: inline-block;
+  float: right;
+}
+
+.message_content {
+  padding-bottom: 5px;
+}

@@ -19,9 +19,12 @@
     //Basic message receive
     chat.ws.onmessage = function (event) {
       var messageFromServer = event.data;
-      var list_element = document.createElement('li');
-      list_element.innerHTML = messageFromServer;
-      $("#message_list ul").prepend(list_element);
+      var msg = document.createElement('div');
+      msg.setAttribute("class", "message_container")
+      msg.innerHTML = messageFromServer;
+      $("#message_list").append(msg);
+      var elem = document.getElementById('message_list');
+      elem.scrollTop = elem.scrollHeight;
     };
 
     var inputbox = document.getElementById("inputbox");
@@ -38,9 +41,15 @@
       }
     }, false); });
 </script>
-
-<h1>{{ chat.name }}</h1>
-<div id="message_list">
-  <ul></ul>
+<link href="/static/chatroom.css" rel="stylesheet">
+<div class="container">
+  <div class="room_header">
+    <div class="chatname">
+      {{ chat.name }}
+      <a href="{% url 'index' %}">Leave chatroom</a>
+    </div>
+  </div>
+  <div id="message_list">
+  </div>
 </div>
 <textarea rows="4" cols="40" id="inputbox"></textarea>
