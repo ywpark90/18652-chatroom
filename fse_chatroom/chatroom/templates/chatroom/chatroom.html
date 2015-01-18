@@ -4,31 +4,28 @@
     $(document).ready( function() {
 
     while(true) {
-      var name = prompt("Enter your name", "Anonymous");
+      var name = prompt("Enter your username", "anonymous");
       if (name == null) {
-        name = "Anonymous";
+        name = "anonymous";
         break;
       }
 
       if (!/^[-_ a-zA-Z0-9]+$/.test(name)) {
-        alert("Invalid name");
+        alert("Only alphanumerics are allowed");
       } else if (name.length > 10) {
-        alert("Name is too long");
+        alert("Username is too long");
       } else {
         break;
       }
     }
 
     window.chat = {};
-    //Instantiate a websocket client connected to our server
     chat.ws = $.gracefulWebSocket("ws://127.0.0.1:1025/ws");
 
-    //Basic message send
     chat.send = function (message) {
       chat.ws.send(name+":"+message);
     }
 
-    //Basic message receive
     chat.ws.onmessage = function (event) {
       var messageFromServer = event.data;
       var msg = document.createElement('div');
@@ -44,9 +41,7 @@
     inputbox.addEventListener("keydown", function(e) {
       if (!e) { var e = window.event; }
 
-      //keyCode 13 is the enter/return button keyCode
       if (e.keyCode == 13 && inputbox.value.match(/\S/)) {
-        // enter/return probably starts a new line by default
         e.preventDefault();
         chat.send(inputbox.value);
         inputbox.value="";
