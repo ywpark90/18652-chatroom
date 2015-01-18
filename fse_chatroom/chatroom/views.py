@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from chatroom.models import *
 
 def index(request):
-    chatlist = ChatRoom.objects.order_by('name')[:5]
+    chatlist = ChatRoom.objects.order_by('name')
     context = {}
 
     context['chatlist'] = chatlist
